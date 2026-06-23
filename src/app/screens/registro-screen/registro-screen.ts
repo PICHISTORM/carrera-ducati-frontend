@@ -24,8 +24,48 @@ export class RegistroScreen implements OnInit {
   public hide_1 = true;
   public inputType_1: 'password' | 'text' = 'password';
 
+
+  /* Confirmar Password */
+  public hide_2 = true;
+  public inputType_2: 'password' | 'text' = 'password';
+
   /* Edades */
   public edades: Array<{ value: number }> = [];
+
+  /*estados*/
+  estados: string[] = [
+    'Aguascalientes',
+    'Baja California',
+    'Baja California Sur',
+    'Campeche',
+    'Chiapas',
+    'Chihuahua',
+    'Coahuila de Zaragoza',
+    'Colima',
+    'Durango',
+    'Estado de México',
+    'Guanajuato',
+    'Guerrero',
+    'Hidalgo',
+    'Jalisco',
+    'Michoacán de Ocampo',
+    'Morelos',
+    'Nayarit',
+    'Nuevo León',
+    'Oaxaca',
+    'Puebla',
+    'Querétaro',
+    'Quintana Roo',
+    'San Luis Potosí',
+    'Sinaloa',
+    'Sonora',
+    'Tabasco',
+    'Tamaulipas',
+    'Tlaxcala',
+    'Veracruz de Ignacio de la Llave',
+    'Yucatán',
+    'Zacatecas'
+  ];
 
   constructor(
     private readonly usuariosService: UsuariosService,
@@ -40,7 +80,7 @@ export class RegistroScreen implements OnInit {
   }
 
   private llenarArrayEdades(): void {
-    // Igual a su lógica original (18..80)
+
     this.edades = Array.from({ length: 63 }, (_, i) => ({ value: i + 18 }));
   }
 
@@ -55,10 +95,10 @@ export class RegistroScreen implements OnInit {
     console.log('Registro de usuario:', this.user);
 
     // // 1) Validación centralizada en UsuariosService
-    // this.errors = this.usuariosService.validarUsuario(this.user);
+    this.errors = this.usuariosService.validarUsuario(this.user);
 
     // // 2) Sin jQuery: si hay errores, se detiene
-    // if (Object.keys(this.errors).length > 0) return;
+     if (Object.keys(this.errors).length > 0) return;
 
     // 3) Registro
     this.isLoading = true;
@@ -67,12 +107,18 @@ export class RegistroScreen implements OnInit {
   }
 
   public goLogin(): void {
-    this.router.navigate(['']); // ajuste según su app
+    this.router.navigate(['']);
   }
 
   public showPassword(): void {
     this.hide_1 = !this.hide_1;
     this.inputType_1 = this.hide_1 ? 'password' : 'text';
+  }
+
+  public showPwdConfirmar():void{
+
+    this.hide_2 = !this.hide_2;
+    this.inputType_2 = this.hide_2 ? 'password' : 'text';
   }
 
 }
