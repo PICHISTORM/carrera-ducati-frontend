@@ -12,6 +12,8 @@ export const routes: Routes = [
     loadComponent: () => import('./screens/registro-screen/registro-screen').then(m => m.RegistroScreen),
   },
   {
+
+
     path: 'app',
     children: [
       {

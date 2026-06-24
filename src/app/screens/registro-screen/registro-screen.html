@@ -29,7 +29,7 @@
           <!-- Nombre -->
           <mat-form-field class="inputs-login" appearance="outline">
             <mat-label>Nombre</mat-label>
-            <input [(ngModel)]="user.first_name" type="text" matInput placeholder="Ingresa nombre">
+            <input [(ngModel)]="user.first_name" type="text" matInput placeholder="Ingresa nombre" (keypress)="soloLetras($event)">
           </mat-form-field>
           @if (errors.first_name) {
           <div class="invalid-feedback">{{ errors.first_name }}</div>
@@ -38,7 +38,7 @@
           <!-- Apellidos -->
           <mat-form-field class="inputs-login" appearance="outline">
             <mat-label>Apellidos</mat-label>
-            <input [(ngModel)]="user.last_name" type="text" matInput placeholder="Ingresa apellido">
+            <input [(ngModel)]="user.last_name" type="text" matInput placeholder="Ingresa apellido" (keypress)="soloLetras($event)">
           </mat-form-field>
           @if (errors.last_name) {
           <div class="invalid-feedback">{{ errors.last_name }}</div>
