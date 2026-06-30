@@ -102,8 +102,14 @@ export class RegistroScreen implements OnInit {
 
     // 3) Registro
     this.isLoading = true;
-    this.usuariosService.guardarUsuario(this.user);
-    this.router.navigate(['app', 'perfil-usuario']);
+        try {
+      this.usuariosService.guardarUsuario(this.user);
+      console.log('Usuario guardado con éxito. Redirigiendo...');
+      this.router.navigate(['app', 'perfil-usuario']);
+    } catch (error) {
+      console.error('Error al guardar el usuario:', error);
+      this.isLoading = false;
+    }
 
 
   }
