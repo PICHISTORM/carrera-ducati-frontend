@@ -42,6 +42,8 @@ export type RegistroErrors = Partial<Record<keyof RegistroUser, string>>;
 })
 export class UsuariosService {
 
+  private readonly storageKey = 'carrera-ducati-registro';
+
 
   constructor(
     private validatorService: ValidatorService,
@@ -170,5 +172,27 @@ error.terminos_condiciones = this.errorService.required;
 
 return error;
 }
+
+  public guardarUsuario(user: RegistroUser): void {
+    localStorage.setItem(this.storageKey, JSON.stringify(user));
+  }
+
+  public obtenerUsuario(): RegistroUser | null {
+    const rawUser = localStorage.getItem(this.storageKey);
+
+    if (!rawUser) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(rawUser) as RegistroUser;
+    } catch {
+      return null;
+    }
+  }
+
+  public limpiarUsuario(): void {
+    localStorage.removeItem(this.storageKey);
+  }
 
 }

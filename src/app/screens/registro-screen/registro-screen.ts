@@ -102,6 +102,8 @@ export class RegistroScreen implements OnInit {
 
     // 3) Registro
     this.isLoading = true;
+    this.usuariosService.guardarUsuario(this.user);
+    this.router.navigate(['app', 'perfil-usuario']);
 
 
   }

@@ -1,1 +1,98 @@
-<p>perfil-usuario-screen works!</p>
+<section class="perfil-user" aria-label="Perfil del usuario">
+	<mat-drawer-container class="perfil-user__drawer-container" autosize>
+		<mat-drawer #drawer class="perfil-user__drawer" mode="over" position="start" [opened]="drawerOpen"
+			(closedStart)="drawerOpen = false">
+			<app-left-sidebar [isLogin]="isLogin" (closeSidebar)="closeSidebar()"></app-left-sidebar>
+		</mat-drawer>
+
+		<mat-drawer-content class="perfil-user__content">
+			<app-header-app (menuToggle)="toggleSidebar()"></app-header-app>
+
+			<main class="perfil-user__body" role="main">
+				<section class="perfil-user__hero" aria-label="Encabezado de perfil">
+					<img src="assets/images/banner-img.png" class="perfil-user__hero-img" alt="Perfil del usuario" loading="eager"
+						fetchpriority="high" decoding="async">
+
+					<div class="perfil-user__title-row">
+						<span class="perfil-user__title-line" aria-hidden="true"></span>
+						<h1 class="perfil-user__title">Perfil del usuario</h1>
+					</div>
+				</section>
+
+				<section class="perfil-user__inner" aria-label="Datos del perfil">
+					@if (usuario) {
+						<article class="perfil-user__card perfil-user__card--hero">
+							<img class="perfil-user__avatar" [src]="photoUrl" alt="Foto de perfil">
+							<div class="perfil-user__identity">
+								<p class="perfil-user__eyebrow">Registro guardado</p>
+								<h2 class="perfil-user__name">{{ nombreCompleto }}</h2>
+
+							</div>
+						</article>
+
+            <hr class="perfil-user__divider">
+
+             <p class="perfil-user__subtitle">Tus datos registrados se muestran a continuación.</p>
+
+
+
+						<article class="perfil-user__grid">
+							<div class="perfil-user__item">
+								<span class="perfil-user__label">Correo electrónico</span>
+								<strong class="perfil-user__value">{{ usuario.email || 'Sin registrar' }}</strong>
+							</div>
+
+							<div class="perfil-user__item">
+								<span class="perfil-user__label">Teléfono</span>
+								<strong class="perfil-user__value">{{ usuario.telefono || 'Sin registrar' }}</strong>
+							</div>
+
+							<div class="perfil-user__item">
+								<span class="perfil-user__label">Ciudad y estado</span>
+								<strong class="perfil-user__value">{{ ubicacion || 'Sin registrar' }}</strong>
+							</div>
+
+							<div class="perfil-user__item">
+								<span class="perfil-user__label">CURP</span>
+								<strong class="perfil-user__value">{{ usuario.curp || 'Sin registrar' }}</strong>
+							</div>
+
+							<div class="perfil-user__item">
+								<span class="perfil-user__label">RFC</span>
+								<strong class="perfil-user__value">{{ usuario.rfc || 'Sin registrar' }}</strong>
+							</div>
+
+							<div class="perfil-user__item">
+								<span class="perfil-user__label">Edad</span>
+								<strong class="perfil-user__value">{{ usuario.edad ?? 'Sin registrar' }}</strong>
+							</div>
+
+							<div class="perfil-user__item">
+								<span class="perfil-user__label">Grado de estudio</span>
+								<strong class="perfil-user__value">{{ usuario.grado_estudios || 'Sin registrar' }}</strong>
+							</div>
+<!--
+							<div class="perfil-user__item">
+								<span class="perfil-user__label">ID de usuario</span>
+								<strong class="perfil-user__value">{{ usuario.id_usuario || 'Sin registrar' }}</strong>
+							</div>
+
+              -->
+						</article>
+					} @else {
+						<article class="perfil-user__empty">
+							<p>No hay datos guardados todavía.</p>
+							<button mat-flat-button class="perfil-user__button" type="button" (click)="goRegistro()">
+								Ir al registro
+							</button>
+						</article>
+					}
+				</section>
+
+				<section class="perfil-user__footer" aria-label="Pie de página">
+					<app-footer-app [showLicensed]="showLicensed"></app-footer-app>
+				</section>
+			</main>
+		</mat-drawer-content>
+	</mat-drawer-container>
+</section>
